@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Byatara | Creative Developer</title>
+  <link rel="icon" type="image/jpeg" href="Image/main2.png"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: { 
+          colors: {
+            'primary': '#007BFF',
+            'secondary': '#FFA500',
+            'text-light': '#333333',
+            'text-dark': '#E0E0E0',
+            'card-light': '#F8F9FA',
+            'card-dark': '#1E1E1E',
+            'bg-dark': '#121212',
+          },
+          animation: {
+            'scale-in': 'scale-in 0.3s ease-out forwards',
+          },
+          keyframes: {
+            'scale-in': {
+              'from': { opacity: '0', transform: 'scale(0.95)' },
+              'to': { opacity: '1', transform: 'scale(1)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Poppins', sans-serif; }
+    body.modal-open, body.nav-open { overflow: hidden; }
+
+    /* Navigasi mobile mengambil tinggi penuh viewport dan dapat digulir */
+    .main-nav { 
+      transform: translateX(100%); 
+      height: 100vh; /* Menggunakan 100vh untuk tinggi penuh */
+      top: 0;
+      right: 0; /* Mengubah dari left ke right agar muncul dari kanan */
+      overflow-y: auto;
+    }
+    .main-nav.active { transform: translateX(0); }
+    
+    .site-header, .hero-content { opacity: 0; transform: translateY(-20px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+    body.loaded .site-header { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+    body.loaded .hero-content { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
+
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body class="bg-white dark:bg-bg-dark text-text-light dark:text-text-dark transition-colors duration-300">
+
+  <div id="loading-screen" class="fixed inset-0 z-[2000] flex items-center justify-center bg-white dark:bg-bg-dark transition-opacity duration-500">
+    <div class="w-[50px] h-[50px] border-[5px] border-card-light dark:border-card-dark border-t-primary rounded-full animate-spin"></div>
+  </div>
+
+  <header class="site-header fixed top-0 left-0 w-full z-[1000] bg-white/85 dark:bg-card-dark/85 backdrop-blur-lg border-b border-card-light dark:border-card-dark/50">
+    <div class="container mx-auto px-6 h-20 flex justify-between items-center">
+      <a href="#hero" class="text-3xl font-bold text-primary">Byatara</a>
+    
+      <nav id="main-nav" class="main-nav fixed md:static w-full md:max-w-none md:w-auto bg-white/90 dark:bg-bg-dark/90 backdrop-blur-sm md:bg-transparent dark:md:bg-transparent flex-col md:flex-row flex items-center justify-center md:transform-none transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] z-[1001]">
+        <ul class="flex flex-col md:flex-row items-center gap-8 text-xl md:text-base">
+          <li><a href="#about" class="font-semibold hover:text-primary transition-colors">Tentang</a></li>
+          <li><a href="#projects" class="font-semibold hover:text-primary transition-colors">Proyek</a></li>
+          <li><a href="#pendidikan" class="font-semibold hover:text-primary transition-colors">Pendidikan</a></li>
+          <li><a href="#skills" class="font-semibold hover:text-primary transition-colors">Skill</a></li>
+          <li><a href="#organization" class="font-semibold hover:text-primary transition-colors">Organisasi</a></li>
+          <li><a href="#contact" class="font-semibold hover:text-primary transition-colors">Kontak</a></li>
+        </ul>
+      </nav>
+    
+      <button class="hamburger md:hidden z-[1002] w-7 h-7" id="hamburger" aria-label="Buka menu">
+        <div id="hamburger-icon">
+          <span class="block w-7 h-[3px] bg-text-light dark:bg-text-dark rounded-sm transition-all duration-300"></span>
+          <span class="block w-7 h-[3px] bg-text-light dark:bg-text-dark rounded-sm my-[6px] transition-all duration-300"></span>
+          <span class="block w-7 h-[3px] bg-text-light dark:bg-text-dark rounded-sm transition-all duration-300"></span>
+        </div>
+        <div id="close-icon" class="hidden text-3xl text-text-light dark:text-text-dark">
+          <i class="fas fa-times"></i>
+        </div>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section id="hero" class="relative min-h-screen flex items-center justify-center text-center overflow-hidden">
+      <div class="hero-bg-parallax absolute inset-0 bg-[url('https://source.unsplash.com/random/1600x900?abstract,blue')] bg-cover bg-center z-[-1] opacity-10"></div>
+      <div class="hero-content container">
+        <img src="Image/main.jpg" alt="Avatar Byatara" class="w-[270px] h-[270px] mx-auto rounded-full border-[5px] border-primary my-8 shadow-[0_10px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_30px_rgba(0,0,0,0.4)]" />
+        <h1 class="text-4xl md:text-5xl font-bold">Byatara Ade Wisnubrata</h1>
+        <p class="text-2xl mt-1 opacity-90">FullStack Developer <span class="typing-effect text-secondary font-semibold"></span></p>
+        <p class="mt-2 opacity-70">Siswa XI RPL di SMKN 6 Surakarta</p>
+      </div>
+    </section>
+
+    <section id="about" class="py-24">
+      <div class="container mx-auto px-6 reveal">
+        <h2 class="text-4xl font-bold text-center mb-12">Tentang Saya</h2>
+        <p class="max-w-3xl mx-auto text-center leading-loose">Saya adalah pelajar SMK yang sedang mendalami dunia pengembangan web dan desain UI/UX. Dengan latar belakang di bidang Rekayasa Perangkat Lunak, saya menggabungkan kreativitas visual dengan logika teknis untuk menciptakan antarmuka yang responsif, estetis, dan fungsional. Serta dengan berbagai macam bahasa pemrograman, tools serta framework yang saya kuasai</p>
+      </div>
+    </section>
+
+    <section id="projects" class="py-24 bg-card-light dark:bg-black/20">
+      <div class="container mx-auto px-6 reveal">
+        <h2 class="text-4xl font-bold text-center mb-12">Proyek</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="project-card bg-white dark:bg-card-dark rounded-xl overflow-hidden shadow-[0_5px_15px_rgba(0,0,0,0.1)] dark:shadow-[0_5px_15px_rgba(0,0,0,0.4)] hover:shadow-[0_15px_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_15px_30px_rgba(0,0,0,0.4)] hover:-translate-y-2 transition-all duration-300 cursor-pointer" data-title="Kalkulator" data-description="Sebuah kalkulator sederhana yang memudahkan pengguna dalam menghitung angka dan sebagainya." data-image="Image/Kalku.png" data-link="https://claveora.github.io/Kalkulator-Sederhana/">
+                <img src="Image/Kalku.png" alt="Proyek Kalkulator" class="w-full h-52 object-cover pointer-events-none" /><div class="p-6 flex justify-between items-center"><h3 class="font-semibold text-xl">Kalkulator</h3><button class="btn-jln text-sm px-4 py-1.5 bg-primary text-white rounded-lg hover:bg-secondary transition-colors z-10 relative">Jalankan</button></div>
+            </div>
+            <div class="project-card bg-white dark:bg-card-dark rounded-xl overflow-hidden shadow-[0_5px_15px_rgba(0,0,0,0.1)] dark:shadow-[0_5px_15px_rgba(0,0,0,0.4)] hover:shadow-[0_15px_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_15px_30px_rgba(0,0,0,0.4)] hover:-translate-y-2 transition-all duration-300 cursor-pointer" data-title="Tic Tac Toe" data-description="Permainan yang membuat anda ketagihan serta memancing emosi teman untuk bermain lagi hingga tiada batasnya." data-image="Image/tik.png" data-link="https://claveora.github.io/Tic-Tac-Toe/">
+                <img src="Image/tik.png" alt="Proyek Tic Tac Toe" class="w-full h-52 object-cover pointer-events-none" /><div class="p-6 flex justify-between items-center"><h3 class="font-semibold text-xl">Tic Tac Toe</h3><button class="btn-jln text-sm px-4 py-1.5 bg-primary text-white rounded-lg hover:bg-secondary transition-colors z-10 relative">Jalankan</button></div>
+            </div>
+            <div class="project-card bg-white dark:bg-card-dark rounded-xl overflow-hidden shadow-[0_5px_15px_rgba(0,0,0,0.1)] dark:shadow-[0_5px_15px_rgba(0,0,0,0.4)] hover:shadow-[0_15px_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_15px_30px_rgba(0,0,0,0.4)] hover:-translate-y-2 transition-all duration-300 cursor-pointer" data-title="3D Showcase" data-description="Sebuah 3D Showcase dengan penggunaan gabungan antara HTML, CSS serta JavaScript khususnya THREE JS." data-image="Image/3d.png" data-link="https://claveora.github.io/3D-Product-Showcase/">
+                <img src="Image/3d.png" alt="3D Showcase" class="w-full h-52 object-cover pointer-events-none" /><div class="p-6 flex justify-between items-center"><h3 class="font-semibold text-xl">3D Showcase</h3><button class="btn-jln text-sm px-4 py-1.5 bg-primary text-white rounded-lg hover:bg-secondary transition-colors z-10 relative">Jalankan</button></div>
+            </div>
+            <div class="project-card bg-white dark:bg-card-dark rounded-xl overflow-hidden shadow-[0_5px_15px_rgba(0,0,0,0.1)] dark:shadow-[0_5px_15px_rgba(0,0,0,0.4)] hover:shadow-[0_15px_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_15px_30px_rgba(0,0,0,0.4)] hover:-translate-y-2 transition-all duration-300 cursor-pointer" data-title="Konverter Suhu" data-description="Jika anda bingung mengubah suhu, gunakan konverter ini agar memudahkan anda dalam membaca suhu celsius dan fahrenheit." data-image="Image/tem.png" data-link="https://claveora.github.io/Temperature/">
+                <img src="Image/tem.png" alt="Proyek Konverter Suhu" class="w-full h-52 object-cover pointer-events-none" /><div class="p-6 flex justify-between items-center"><h3 class="font-semibold text-xl">Konverter Suhu</h3><button class="btn-jln text-sm px-4 py-1.5 bg-primary text-white rounded-lg hover:bg-secondary transition-colors z-10 relative">Jalankan</button></div>
+            </div>
+            <div class="project-card bg-white dark:bg-card-dark rounded-xl overflow-hidden shadow-[0_5px_15px_rgba(0,0,0,0.1)] dark:shadow-[0_5px_15px_rgba(0,0,0,0.4)] hover:shadow-[0_15px_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_15px_30px_rgba(0,0,0,0.4)] hover:-translate-y-2 transition-all duration-300 cursor-pointer" data-title="Konverter Suhu" data-description="Website statis guna mengedukasi dan mengenalkan framework CSS yaitu Tailwind CSS kepada user." data-image="Image/edutail.png" data-link="https://edu-tailwindd.vercel.app/">
+                <img src="Image/edutail.png" alt="Proyek Edu Tailwind" class="w-full h-52 object-cover pointer-events-none" /><div class="p-6 flex justify-between items-center"><h3 class="font-semibold text-xl">Edu Tailwind</h3><button class="btn-jln text-sm px-4 py-1.5 bg-primary text-white rounded-lg hover:bg-secondary transition-colors z-10 relative">Jalankan</button></div>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pendidikan" class="py-24">
+      <div class="container mx-auto px-6 reveal">
+          <h2 class="text-4xl font-bold text-center mb-12">Riwayat Pendidikan</h2>
+          <div class="relative max-w-3xl mx-auto py-8 hidden md:block">
+              <div class="absolute top-0 h-full w-1 bg-primary left-1/2 -translate-x-1/2"></div>
+              <div class="timeline-item relative w-1/2 pr-10 mb-8 text-right"><div class="timeline-content bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-[0_5px_15px_rgba(0,0,0,0.1)] dark:shadow-[0_5px_15px_rgba(0,0,0,0.4)] hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:-translate-y-2 transition-all duration-300"><div class="absolute top-5 -right-2.5 w-5 h-5 bg-secondary rounded-full border-4 border-white dark:border-bg-dark"></div><h3 class="text-2xl font-bold text-primary mb-2">SD Negeri Banyuanyar 1</h3><p>Tempat saya menempuh pendidikan dasar dan mulai mengenal dunia belajar formal.</p></div></div>
+              <div class="timeline-item relative w-1/2 ml-auto pl-10 mb-8"><div class="timeline-content bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-[0_5px_15px_rgba(0,0,0,0.1)] dark:shadow-[0_5px_15px_rgba(0,0,0,0.4)] hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:-translate-y-2 transition-all duration-300"><div class="absolute top-5 -left-2.5 w-5 h-5 bg-secondary rounded-full border-4 border-white dark:border-bg-dark"></div><h3 class="text-2xl font-bold text-primary mb-2">SMP Negeri 2 Surakarta</h3><p>Di sini saya mulai mengasah jiwa akademik maupun non-akademik.</p></div></div>
+              <div class="timeline-item relative w-1/2 pr-10 mb-8 text-right"><div class="timeline-content bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-[0_5px_15px_rgba(0,0,0,0.1)] dark:shadow-[0_5px_15px_rgba(0,0,0,0.4)] hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:-translate-y-2 transition-all duration-300"><div class="absolute top-5 -right-2.5 w-5 h-5 bg-secondary rounded-full border-4 border-white dark:border-bg-dark"></div><h3 class="text-2xl font-bold text-primary mb-2">SMK Negeri 6 Surakarta</h3><p>Jurusan Rekayasa Perangkat Lunak, pemrograman, dan pengembangan web modern.</p></div></div>
+              <div class="timeline-item relative w-1/2 ml-auto pl-10 mb-8"><div class="timeline-content bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-[0_5px_15px_rgba(0,0,0,0.1)] dark:shadow-[0_5px_15px_rgba(0,0,0,0.4)] hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:-translate-y-2 transition-all duration-300"><div class="absolute top-5 -left-2.5 w-5 h-5 bg-secondary rounded-full border-4 border-white dark:border-bg-dark"></div><h3 class="text-2xl font-bold text-primary mb-2">Universitas Gadjah Mada</h3><p>Program Ilmu Komputer Ya Allah AAMMIIN semoga terkabulkan aamiin</p></div></div>
+          </div>
+          <div class="relative max-w-3xl mx-auto py-8 md:hidden">
+              <div class="absolute top-0 h-full w-1 bg-primary left-2"></div>
+              <div class="relative pl-10 mb-8"><div class="absolute top-5 -left-2.5 w-5 h-5 bg-secondary rounded-full border-4 border-white dark:border-bg-dark"></div><div class="bg-card-light dark:bg-card-dark p-6 rounded-xl"><h3 class="text-2xl font-bold text-primary mb-2">SD Negeri Banyuanyar 1</h3><p>Tempat saya menempuh pendidikan dasar dan mulai mengenal dunia belajar formal.</p></div></div>
+              <div class="relative pl-10 mb-8"><div class="absolute top-5 -left-2.5 w-5 h-5 bg-secondary rounded-full border-4 border-white dark:border-bg-dark"></div><div class="bg-card-light dark:bg-card-dark p-6 rounded-xl"><h3 class="text-2xl font-bold text-primary mb-2">SMP Negeri 2 Surakarta</h3><p>Di sini saya mulai mengasah jiwa akademik maupun non-akademik.</p></div></div>
+              <div class="relative pl-10 mb-8"><div class="absolute top-5 -left-2.5 w-5 h-5 bg-secondary rounded-full border-4 border-white dark:border-bg-dark"></div><div class="bg-card-light dark:bg-card-dark p-6 rounded-xl"><h3 class="text-2xl font-bold text-primary mb-2">SMK Negeri 6 Surakarta</h3><p>Jurusan Rekayasa Perangkat Lunak, pemrograman, dan pengembangan web modern.</p></div></div>
+              <div class="relative pl-10 mb-8"><div class="absolute top-5 -left-2.5 w-5 h-5 bg-secondary rounded-full border-4 border-white dark:border-bg-dark"></div><div class="bg-card-light dark:bg-card-dark p-6 rounded-xl"><h3 class="text-2xl font-bold text-primary mb-2">Universitas Gadjah Mada</h3><p>Program Ilmu Komputer Ya Allah AAMMIIN semoga terkabulkan aamiin</p></div></div>
+          </div>
+      </div>
+    </section>
+
+    <section id="skills" class="py-24 bg-card-light dark:bg-black/20">
+      <div class="container mx-auto px-6 reveal">
+        <h2 class="text-4xl font-bold text-center mb-12">Skill Saya</h2>
+        <div class="flex flex-wrap justify-center gap-6">
+          <div class="skill-item bg-white dark:bg-card-dark py-4 px-6 rounded-lg font-semibold flex items-center gap-3 transition-all duration-300 hover:bg-primary hover:text-white group hover:-translate-y-1"><i class="devicon-visualstudio-plain text-secondary group-hover:text-white text-xl transition-colors"></i>Visual Studio Code</div>
+          <div class="skill-item bg-white dark:bg-card-dark py-4 px-6 rounded-lg font-semibold flex items-center gap-3 transition-all duration-300 hover:bg-primary hover:text-white group hover:-translate-y-1"><i class="fab fa-html5 text-secondary group-hover:text-white text-xl transition-colors"></i>HTML</div>
+          <div class="skill-item bg-white dark:bg-card-dark py-4 px-6 rounded-lg font-semibold flex items-center gap-3 transition-all duration-300 hover:bg-primary hover:text-white group hover:-translate-y-1"><i class="fab fa-css3-alt text-secondary group-hover:text-white text-xl transition-colors"></i>CSS</div>
+          <div class="skill-item bg-white dark:bg-card-dark py-4 px-6 rounded-lg font-semibold flex items-center gap-3 transition-all duration-300 hover:bg-primary hover:text-white group hover:-translate-y-1"><i class="fab fa-js-square text-secondary group-hover:text-white text-xl transition-colors"></i>JavaScript</div>
+          <div class="skill-item bg-white dark:bg-card-dark py-4 px-6 rounded-lg font-semibold flex items-center gap-3 transition-all duration-300 hover:bg-primary hover:text-white group hover:-translate-y-1"><i class="fab fa-java text-secondary group-hover:text-white text-xl transition-colors"></i>Java</div>
+          <div class="skill-item bg-white dark:bg-card-dark py-4 px-6 rounded-lg font-semibold flex items-center gap-3 transition-all duration-300 hover:bg-primary hover:text-white group hover:-translate-y-1"><i class="fab fa-python text-secondary group-hover:text-white text-xl transition-colors"></i>Python</div>
+          <div class="skill-item bg-white dark:bg-card-dark py-4 px-6 rounded-lg font-semibold flex items-center gap-3 transition-all duration-300 hover:bg-primary hover:text-white group hover:-translate-y-1"><i class="devicon-cplusplus-plain text-secondary group-hover:text-white text-xl transition-colors"></i>C++</div>
+          <div class="skill-item bg-white dark:bg-card-dark py-4 px-6 rounded-lg font-semibold flex items-center gap-3 transition-all duration-300 hover:bg-primary hover:text-white group hover:-translate-y-1"><i class="devicon-php-plain text-secondary group-hover:text-white text-xl transition-colors"></i>PHP</div>
+          <div class="skill-item bg-white dark:bg-card-dark py-4 px-6 rounded-lg font-semibold flex items-center gap-3 transition-all duration-300 hover:bg-primary hover:text-white group hover:-translate-y-1"><i class="devicon-tailwindcss-original text-secondary group-hover:text-white text-xl transition-colors"></i>Tailwind CSS</div>
+          <div class="skill-item bg-white dark:bg-card-dark py-4 px-6 rounded-lg font-semibold flex items-center gap-3 transition-all duration-300 hover:bg-primary hover:text-white group hover:-translate-y-1"><i class="devicon-bootstrap-plain text-secondary group-hover:text-white text-xl transition-colors"></i>Bootstrap</div>
+          <div class="skill-item bg-white dark:bg-card-dark py-4 px-6 rounded-lg font-semibold flex items-center gap-3 transition-all duration-300 hover:bg-primary hover:text-white group hover:-translate-y-1"><i class="fas fa-palette text-secondary group-hover:text-white text-xl transition-colors"></i>UI/UX Design</div>
+          <div class="skill-item bg-white dark:bg-card-dark py-4 px-6 rounded-lg font-semibold flex items-center gap-3 transition-all duration-300 hover:bg-primary hover:text-white group hover:-translate-y-1"><i class="devicon-canva-original text-secondary group-hover:text-white text-xl transition-colors"></i>Canva</div>
+          <div class="skill-item bg-white dark:bg-card-dark py-4 px-6 rounded-lg font-semibold flex items-center gap-3 transition-all duration-300 hover:bg-primary hover:text-white group hover:-translate-y-1"><i class="fab fa-figma text-secondary group-hover:text-white text-xl transition-colors"></i>Figma</div>
+          <div class="skill-item bg-white dark:bg-card-dark py-4 px-6 rounded-lg font-semibold flex items-center gap-3 transition-all duration-300 hover:bg-primary hover:text-white group hover:-translate-y-1"><i class="fas fa-mobile-alt text-secondary group-hover:text-white text-xl transition-colors"></i>Mobile Development</div>
+          <div class="skill-item bg-white dark:bg-card-dark py-4 px-6 rounded-lg font-semibold flex items-center gap-3 transition-all duration-300 hover:bg-primary hover:text-white group hover:-translate-y-1"><i class="devicon-androidstudio-plain text-secondary group-hover:text-white text-xl transition-colors"></i>Android Studio</div>
+          <div class="skill-item bg-white dark:bg-card-dark py-4 px-6 rounded-lg font-semibold flex items-center gap-3 transition-all duration-300 hover:bg-primary hover:text-white group hover:-translate-y-1"><i class="fas fa-laptop-code text-secondary group-hover:text-white text-xl transition-colors"></i>Front-End Developer</div>
+          <div class="skill-item bg-white dark:bg-card-dark py-4 px-6 rounded-lg font-semibold flex items-center gap-3 transition-all duration-300 hover:bg-primary hover:text-white group hover:-translate-y-1"><i class="fas fa-server text-secondary group-hover:text-white text-xl transition-colors"></i>Back-End Developer</div>
+          <div class="skill-item bg-white dark:bg-card-dark py-4 px-6 rounded-lg font-semibold flex items-center gap-3 transition-all duration-300 hover:bg-primary hover:text-white group hover:-translate-y-1"><i class="devicon-wordpress-plain text-secondary group-hover:text-white text-xl transition-colors"></i>Wordpress</div>
+          <div class="skill-item bg-white dark:bg-card-dark py-4 px-6 rounded-lg font-semibold flex items-center gap-3 transition-all duration-300 hover:bg-primary hover:text-white group hover:-translate-y-1"><i class="fas fa-cubes text-secondary group-hover:text-white text-xl transition-colors"></i>Laragon</div>
+          <div class="skill-item bg-white dark:bg-card-dark py-4 px-6 rounded-lg font-semibold flex items-center gap-3 transition-all duration-300 hover:bg-primary hover:text-white group hover:-translate-y-1"><i class="devicon-blender-original text-secondary group-hover:text-white text-xl transition-colors"></i>Blender</div>
+          <div class="skill-item bg-white dark:bg-card-dark py-4 px-6 rounded-lg font-semibold flex items-center gap-3 transition-all duration-300 hover:bg-primary hover:text-white group hover:-translate-y-1"><i class="devicon-github-original text-secondary group-hover:text-white text-xl transition-colors"></i>Github</div>
+          <div class="skill-item bg-white dark:bg-card-dark py-4 px-6 rounded-lg font-semibold flex items-center gap-3 transition-all duration-300 hover:bg-primary hover:text-white group hover:-translate-y-1"><i class="devicon-mysql-plain text-secondary group-hover:text-white text-xl transition-colors"></i>MySQL</div>
+          <div class="skill-item bg-white dark:bg-card-dark py-4 px-6 rounded-lg font-semibold flex items-center gap-3 transition-all duration-300 hover:bg-primary hover:text-white group hover:-translate-y-1"><i class="devicon-git-plain text-secondary group-hover:text-white text-xl transition-colors"></i>Git</div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="organization" class="py-24">
+      <div class="container mx-auto px-6 reveal">
+        <h2 class="text-4xl font-bold text-center mb-12">Aktivitas Organisasi</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 [perspective:1000px]">
+          <div class="group h-[400px] w-full cursor-pointer">
+            <div class="relative h-full w-full rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_30px_rgba(0,0,0,0.4)] transition-all duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+              <div class="absolute inset-0 rounded-2xl bg-cover bg-center text-white flex flex-col justify-center items-center text-center p-8 bg-[linear-gradient(rgba(0,0,0,0.3),rgba(34,84,61,0.8)),url('https://source.unsplash.com/random/500x700?scout,campfire')]"><i class="fas fa-campground text-5xl text-secondary mb-4"></i><h3 class="text-3xl font-bold mb-2">DG Praduska</h3><p class="bg-primary px-4 py-1 rounded-full font-semibold text-sm">Anggota</p></div>
+              <div class="absolute inset-0 h-full w-full rounded-2xl bg-card-light dark:bg-card-dark p-8 flex flex-col justify-center text-center [backface-visibility:hidden] [transform:rotateY(180deg)]"><h4 class="text-2xl font-bold text-primary mb-4">Tugas & Tanggung Jawab</h4><p class="leading-relaxed text-sm">Bertanggung jawab dalam merencanakan dan melaksanakan kegiatan kepramukaan, serta menjaga tradisi dan nilai-nilai kepramukaan semasa SMP Negeri 2 Surakarta.</p></div>
+            </div>
+          </div>
+          <div class="group h-[400px] w-full cursor-pointer">
+            <div class="relative h-full w-full rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_30px_rgba(0,0,0,0.4)] transition-all duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+              <div class="absolute inset-0 rounded-2xl bg-cover bg-center text-white flex flex-col justify-center items-center text-center p-8 bg-[linear-gradient(rgba(0,0,0,0.3),rgba(26,59,139,0.8)),url('https://source.unsplash.com/random/500x700?school,meeting')]"><i class="fas fa-users-cog text-5xl text-secondary mb-4"></i><h3 class="text-3xl font-bold mb-2">OSIS</h3><p class="bg-primary px-4 py-1 rounded-full font-semibold text-sm">Koordinator A'24</p></div>
+              <div class="absolute inset-0 h-full w-full rounded-2xl bg-card-light dark:bg-card-dark p-8 flex flex-col justify-center text-center [backface-visibility:hidden] [transform:rotateY(180deg)]"><h4 class="text-2xl font-bold text-primary mb-4">Tugas & Tanggung Jawab</h4><p class="leading-relaxed text-sm">Mengkoordinasikan, menjembatani komunikasi antar angkatan, serta memimpin rapat dan acara khusus.</p></div>
+            </div>
+          </div>
+          <div class="group h-[400px] w-full cursor-pointer">
+            <div class="relative h-full w-full rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_30px_rgba(0,0,0,0.4)] transition-all duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+              <div class="absolute inset-0 rounded-2xl bg-cover bg-center text-white flex flex-col justify-center items-center text-center p-8 bg-[linear-gradient(rgba(0,0,0,0.3),rgba(217,119,6,0.8)),url('https://source.unsplash.com/random/500x700?community,media')]"><i class="fas fa-bullhorn text-5xl text-secondary mb-4"></i><h3 class="text-3xl font-bold mb-2">KMVI</h3><p class="bg-primary px-4 py-1 rounded-full font-semibold text-sm">Humas</p></div>
+              <div class="absolute inset-0 h-full w-full rounded-2xl bg-card-light dark:bg-card-dark p-8 flex flex-col justify-center text-center [backface-visibility:hidden] [transform:rotateY(180deg)]"><h4 class="text-2xl font-bold text-primary mb-4">Tugas & Tanggung Jawab</h4><p class="leading-relaxed text-sm">Menjadi penghubung antara organisasi dengan pihak eksternal, mengelola media sosial dan membangun citra positif KMVI di mata publik.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="py-24 bg-card-light dark:bg-black/20">
+      <div class="container mx-auto px-6 reveal">
+        <h2 class="text-4xl font-bold text-center mb-12">Hubungi Saya</h2>
+        <form action="https://formspree.io/f/xandrjnw" method="POST" class="max-w-2xl mx-auto flex flex-col gap-4">
+          <input type="text" name="name" placeholder="Nama Anda" required class="w-full p-4 rounded-lg bg-white dark:bg-card-dark border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary transition" />
+          <input type="email" name="email" placeholder="Email Anda" required class="w-full p-4 rounded-lg bg-white dark:bg-card-dark border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary transition" />
+          <textarea name="message" placeholder="Pesan Anda" rows="5" required class="w-full p-4 rounded-lg bg-white dark:bg-card-dark border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary transition"></textarea>
+          <button type="submit" class="py-3 px-8 bg-primary text-white font-semibold rounded-lg hover:bg-secondary transition-colors duration-300 self-center">Kirim Pesan</button>
+        </form>
+        <div class="flex justify-center gap-8 mt-12 text-3xl text-text-light dark:text-text-dark/70">
+          <a href="https://github.com/claveora" target="_blank" rel="noopener noreferrer" class="hover:text-primary hover:-translate-y-1 transition-all"><i class="fab fa-github"></i></a>
+          <a href="https://api.whatsapp.com/send/?phone=62895421349669" target="_blank" rel="noopener noreferrer" class="hover:text-primary hover:-translate-y-1 transition-all"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://www.instagram.com/b__ytra" target="_blank" rel="noopener noreferrer" class="hover:text-primary hover:-translate-y-1 transition-all"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="py-8 bg-card-light dark:bg-card-dark">
+    <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-center">
+      <p>&copy; 2025 Byatara</p>
+      <div class="theme-switcher flex items-center gap-2">
+        <span class="font-semibold">Dark Mode</span>
+        <input type="checkbox" id="dark-mode-toggle" class="hidden" />
+        <label id="dark-mode-label" for="dark-mode-toggle" class="relative w-[50px] h-[26px] rounded-full bg-text-light/50 dark:bg-text-dark/40 transition-colors duration-300 ease-in-out cursor-pointer">
+          <span id="dark-mode-slider" class="absolute top-1 left-1 w-[18px] h-[18px] bg-white dark:bg-bg-dark rounded-full transition-transform duration-300 ease-in-out"></span>
+        </label>
+      </div>
+    </div>
+  </footer>
+
+  <div id="project-modal" class="hidden fixed inset-0 z-[1001] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+      </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
