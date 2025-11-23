@@ -1,76 +1,82 @@
-Portofolio Web
-Desain portofolio menggunakan pendekatan modern, responsif, dan didukung dengan dark mode (mode gelap), yang merupakan praktik terbaik saat ini.
+# 🚀 Byatara Ade Wisnubrata | Creative Developer & UI/UX Enthusiast
 
-🎨 Tampilan & Estetika
-Framework CSS: Anda menggunakan Tailwind CSS secara ekstensif (seperti yang terlihat dari banyak kelas utilitas seperti dark:bg-bg-dark, text-primary, md:grid-cols-2).
+Selamat datang di repositori utama portofolio saya! Saya adalah seorang siswa **Rekayasa Perangkat Lunak (RPL)** yang bersemangat dalam menggabungkan estetika desain dengan logika pengembangan web modern.
 
-Tema Warna: Palet warna utama terdiri dari:
 
-Primary: #007BFF (Biru cerah)
 
-Secondary: #FFA500 (Oranye cerah)
+---
 
-Terdapat transisi warna yang halus untuk mode terang/gelap (transition-colors duration-300).
+## 🌟 Tentang Saya
 
-Font: Menggunakan Poppins sebagai sans-serif utama, memberikan tampilan yang bersih dan modern.
+Saya adalah seorang pelajar SMK kelas XI RPL dari SMKN 6 Surakarta. Fokus utama saya adalah menjadi seorang **FullStack Developer** yang kompeten, dengan keahlian khusus dalam menciptakan antarmuka yang **responsif, estetis, dan fungsional**. Saya percaya bahwa setiap *project* harus memiliki landasan teknis yang kuat sekaligus pengalaman pengguna (UX) yang memuaskan.
 
-Loading Screen: Ada layar loading awal (#loading-screen) yang menampilkan spinner beranimasi, memberikan pengalaman pengguna yang lebih baik saat aset dimuat.
+**Saat Ini:** Siswa XI RPL di SMKN 6 Surakarta
 
-⚙️ Struktur Utama (Berdasarkan ID)
-Halaman ini terstruktur dengan baik menggunakan ID yang jelas untuk navigasi:
+---
 
-#hero: Bagian awal/pembuka. Berisi avatar, nama, dan judul.
+## 🛠️ Kemampuan & Teknologi
 
-#about: Deskripsi singkat tentang diri Anda ("Tentang Saya").
+Saya memiliki pengalaman dengan berbagai bahasa pemrograman, *framework*, dan *tools* yang dibutuhkan dalam alur kerja pengembangan modern.
 
-#projects: Daftar proyek Anda. Menggunakan kartu proyek (project-card) yang memiliki efek hover yang menarik dan memicu modal untuk detail ("Jalankan").
+### Bahasa Pemrograman Inti
+* <img alt="HTML5" src="https://img.shields.io/badge/-HTML5-E34F26?logo=html5&logoColor=white&style=flat-square" />
+* <img alt="CSS3" src="https://img.shields.io/badge/-CSS3-1572B6?logo=css3&logoColor=white&style=flat-square" />
+* <img alt="JavaScript" src="https://img.shields.io/badge/-JavaScript-F7DF1E?logo=javascript&logoColor=black&style=flat-square" />
+* <img alt="Python" src="https://img.shields.io/badge/-Python-3776AB?logo=python&logoColor=white&style=flat-square" />
+* <img alt="Java" src="https://img.shields.io/badge/-Java-007396?logo=java&logoColor=white&style=flat-square" />
+* <img alt="PHP" src="https://img.shields.io/badge/-PHP-777BB4?logo=php&logoColor=white&style=flat-square" />
 
-#pendidikan: Riwayat pendidikan yang disajikan dalam format Timeline responsif (berbeda untuk tampilan desktop dan mobile).
+### Framework & Styling
+* <img alt="Tailwind CSS" src="https://img.shields.io/badge/-TailwindCSS-06B6D4?logo=tailwindcss&logoColor=white&style=flat-square" />
+* <img alt="Bootstrap" src="https://img.shields.io/badge/-Bootstrap-7952B3?logo=bootstrap&logoColor=white&style=flat-square" />
+* **UI/UX Design**
 
-#skills: Daftar kemampuan teknis (Visual Studio Code, HTML, CSS, JavaScript, Java, Python, Tailwind CSS, Figma, dll.) yang ditampilkan dalam bentuk tag yang menarik.
+### Tools & Lainnya
+* **Version Control:** Git, GitHub
+* **Database:** MySQL
+* **IDE:** Visual Studio Code, Android Studio
+* **Desain Grafis:** Figma, Canva, Blender
+* **Development:** Mobile Development, Front-End, Back-End
 
-#organization: Aktivitas organisasi menggunakan desain kartu flip 3D yang keren untuk menampilkan tanggung jawab.
+---
 
-#contact: Formulir kontak (formspree.io) dan tautan media sosial.
+## 💼 Proyek Pilihan (Featured Projects)
 
-✨ Fungsionalitas Interaktif (Berdasarkan JavaScript & CSS)
-Kode Anda mengimplementasikan beberapa fitur canggih:
+Berikut adalah beberapa proyek unggulan yang menunjukkan kemampuan teknis saya:
 
-Dark Mode (Mode Gelap):
+| Nama Proyek | Deskripsi Singkat | Teknologi Utama | Tautan (Live Demo) |
+| :--- | :--- | :--- | :--- |
+| **Kalkulator Sederhana** | Kalkulator standar untuk memudahkan perhitungan dasar. | HTML, CSS, JavaScript | [Demo](https://claveora.github.io/Kalkulator-Sederhana/) |
+| **Tic Tac Toe** | Implementasi game klasik yang adiktif. | HTML, CSS, JavaScript | [Demo](https://claveora.github.io/Tic-Tac-Toe/) |
+| **3D Product Showcase** | Tampilan produk 3D interaktif yang estetik. | HTML, CSS, **Three.js** | [Demo](https://claveora.github.io/3D-Product-Showcase/) |
+| **Edu Tailwind** | Website statis untuk edukasi mengenai penggunaan Tailwind CSS. | HTML, **Tailwind CSS** | [Demo](https://edu-tailwindd.vercel.app/) |
 
-Menggunakan checkbox tersembunyi (#dark-mode-toggle) dan label kustom untuk beralih mode.
+---
 
-CSS Tailwind (misalnya dark:bg-bg-dark) secara otomatis menangani perubahan gaya.
+## 🎓 Riwayat Pendidikan & Organisasi
 
-Responsif Navigasi:
+### Pendidikan
+* **SMK Negeri 6 Surakarta** - Jurusan Rekayasa Perangkat Lunak (RPL)
+* **SMP Negeri 2 Surakarta**
+* **SD Negeri Banyuanyar 1**
 
-Menggunakan hamburger menu (#hamburger) untuk toggle navigasi di perangkat seluler.
+### Organisasi
+Saya aktif dalam kegiatan non-akademik yang mengasah kepemimpinan dan komunikasi:
+* **OSIS (Koordinator A'24)**: Bertanggung jawab dalam mengkoordinasikan program dan acara.
+* **KMVI (Humas)**: Menjadi penghubung eksternal dan mengelola citra organisasi di mata publik.
+* **DG Praduska (Anggota)**: Bertanggung jawab dalam kegiatan kepramukaan.
 
-Navigasi mobile (.main-nav) muncul dari kanan dan mengambil tinggi penuh viewport (height: 100vh).
+---
 
-Animasi Scroll Reveal:
+## 🤝 Hubungi Saya
 
-Menggunakan kelas .reveal dan .visible untuk menerapkan efek animasi (fade dan translateY) saat pengguna scroll ke bagian-bagian baru di halaman.
+Mari terhubung dan berdiskusi mengenai proyek, kolaborasi, atau peluang magang!
 
-Animasi Ketik (Typing Effect):
+| Platform | Tautan |
+| :--- | :--- |
+| **Email** | *byan.byatara@gmail.com* |
+| **GitHub** | [@claveora](https://github.com/claveora) |
+| **Instagram** | [@b__ytra](https://www.instagram.com/b__ytra) |
 
-Terdapat elemen <span class="typing-effect text-secondary font-semibold"></span> yang menyarankan akan ada efek pengetikan untuk judul/jabatan Anda, kemungkinan diimplementasikan dalam script.js.
-
-Modal Proyek:
-
-Anda menyiapkan struktur modal (#project-modal) yang akan digunakan untuk menampilkan detail proyek ketika tombol "Jalankan" pada kartu proyek diklik.
-
-Desain Kartu Flip 3D:
-
-Bagian #organization menggunakan properti CSS 3D (perspective, transform-style: preserve-3d, backface-visibility: hidden) untuk menciptakan efek kartu berbalik saat di-hover.
-
-🛠️ Potensi Peningkatan
-Meskipun kode Anda sangat baik dan modern, berikut beberapa area yang mungkin dapat Anda periksa di file script.js Anda:
-
-Implementasi Typing Effect: Pastikan script untuk elemen .typing-effect berfungsi dengan baik dan memiliki loop yang halus.
-
-Aksesibilitas (A11y): Pastikan semua elemen interaktif (seperti tombol dark mode dan navigasi hamburger) dapat diakses dan dioperasikan dengan keyboard (menggunakan atribut tabindex jika perlu) dan memiliki label aria yang tepat.
-
-Fungsionalitas Modal: Detail proyek saat ini hanya didefinisikan dalam atribut data-title, data-description, dll. di HTML. Pastikan script yang menangani klik pada .project-card mengambil data ini dan menyuntikkannya ke dalam #project-modal sebelum ditampilkan.
-
-Optimasi Aset: Gambar seperti main.jpg dan latar belakang parallax harus dioptimalkan untuk waktu muat yang lebih cepat.
+---
+*Dibuat oleh Byatara Ade Wisnubrata*
